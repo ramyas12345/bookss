@@ -1,0 +1,86 @@
+.login {
+  min-height: calc(100vh - 76px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: "Viga", sans-serif;
+}
+
+.login__card {
+  background: var(--ink-surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.login__eyebrow {
+  font-family: "Viga", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--brass-soft);
+  margin: 0 0 10px;
+}
+
+.login__card h1 {
+  font-family: "Viga", sans-serif;
+  font-size: 1.7rem;
+  margin: 0 0 10px;
+}
+
+.login__hint {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  line-height: 1.5;
+  margin-bottom: 26px;
+}
+
+.login__card label {
+  display: block;
+  font-family: "Viga", sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+
+.login__card input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 11px 12px;
+  background: var(--ink-surface-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--paper);
+  font-size: 0.95rem;
+}
+
+.login__error {
+  color: #A23B3B;
+  font-size: 0.85rem;
+  margin: -6px 0 16px;
+}
+
+.login__submit {
+  width: 100%;
+  background: var(--brass);
+  color: var(--ink);
+  border: none;
+  padding: 13px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 6px;
+  font-family: "Viga", sans-serif;
+}
+
+@media (max-width: 480px) {
+  .login { padding: 24px 16px; }
+  .login__card { padding: 28px 22px; }
+  .login__card input { font-size: 16px; } /* prevents iOS auto-zoom on focus */
+}

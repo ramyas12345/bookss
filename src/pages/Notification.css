@@ -1,0 +1,80 @@
+.bell { position: relative; }
+
+.bell__trigger {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  padding: 4px 6px;
+  line-height: 1;
+}
+
+.bell__badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--brass);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+}
+
+.bell__panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 300px;
+  max-height: 360px;
+  overflow-y: auto;
+  background: var(--ink-surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  z-index: 20;
+  box-shadow: 0 16px 32px -12px var(--shadow);
+}
+
+.bell__title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  margin: 0 0 10px;
+}
+
+.bell__empty {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  padding: 10px 0;
+}
+
+.bell__list { list-style: none; margin: 0; padding: 0; }
+
+.bell__list a {
+  display: block;
+  padding: 9px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.bell__list a:hover { background: var(--ink); }
+
+.bell__item--unread a { background: color-mix(in srgb, var(--brass) 12%, transparent); }
+
+.bell__time {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  opacity: 0.55;
+  margin-top: 2px;
+}

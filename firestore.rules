@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Private profile: name + email. Only the owning uid can read or
+    // write their own profile — this is what keeps emails from ever
+    // being visible to other users.
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Books: public read for everyone (that's the whole point of the
+    // shelf), but only the signed-in author can create/edit their own
+    // book, and a book can never carry an email field.
+    match /books/{bookId} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+        && request.resource.data.authorUid == request.auth.uid
+        && !("email" in request.resource.data)
+        && !("authorEmail" in request.resource.data);
+
+      allow update: if request.auth != null
+        && resource.data.authorUid == request.auth.uid
+        && !("email" in request.resource.data)
+        && !("authorEmail" in request.resource.data);
+
+      allow delete: if request.auth != null
+        && resource.data.authorUid == request.auth.uid;
+    }
+  }
+}

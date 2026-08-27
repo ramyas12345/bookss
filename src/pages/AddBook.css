@@ -1,0 +1,117 @@
+.addbook {
+  display: flex;
+  gap: 56px;
+  padding: 56px 40px 80px;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.addbook__form { flex: 1; min-width: 300px; max-width: 440px; }
+
+.addbook__eyebrow {
+  font-family: "Viga", sans-serif;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: var(--brass-soft);
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+
+.addbook__form h1 {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  margin: 0 0 30px;
+  line-height: 1.2;
+}
+
+.addbook__form label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.addbook__optional { text-transform: none; opacity: 0.6; font-family: var(--font-body); }
+
+.addbook__swatches {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.addbook__swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--swatch);
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.addbook__swatch--active {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px var(--ink-surface), 0 0 0 4px var(--swatch);
+}
+
+.addbook__form input,
+.addbook__form select {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 11px 12px;
+  background: var(--ink-surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--paper);
+  font-size: 0.95rem;
+}
+
+.addbook__error { color: #A23B3B; font-size: 0.85rem; margin: -8px 0 16px; }
+
+.addbook__submit {
+  background: var(--brass);
+  color: var(--ink);
+  border: none;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.addbook__preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-top: 8px;
+}
+
+.addbook__previewLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .addbook { justify-content: center; }
+  .addbook__preview { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .addbook { padding: 32px 20px 60px; gap: 32px; }
+  .addbook__form { min-width: 0; max-width: none; width: 100%; }
+  .addbook__form input,
+  .addbook__form select { font-size: 16px; } /* prevents iOS auto-zoom on focus */
+  .addbook__submit { width: 100%; }
+}

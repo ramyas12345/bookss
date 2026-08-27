@@ -1,0 +1,161 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+.nav__left {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav__back {
+  background: none;
+  border: none;
+  color: var(--mustard);
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 0;
+  opacity: 0.85;
+}
+
+.nav__back:hover { opacity: 1; }
+
+.nav__brand {
+  font-family: var(--font-script);
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--mustard);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.nav__links a { opacity: 0.85; font-weight: 700; transition: opacity 120ms ease; }
+.nav__links a:hover { opacity: 1; }
+
+.nav__cta {
+  background: var(--brass);
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.nav__profile { position: relative; }
+
+.nav__bell {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: none;
+  border: 1px solid var(--line);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.nav__bellBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: var(--brass);
+  color: var(--ink);
+  font-family: "Viga", sans-serif;
+  font-size: 0.62rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.nav__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--brass);
+  color: var(--ink);
+  border: none;
+  font-family: "Viga", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.nav__dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 200px;
+  background: var(--ink-surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 12px 28px -10px var(--shadow);
+  padding: 16px;
+  font-family: "Viga", sans-serif;
+  text-transform: none;
+  letter-spacing: 0;
+  z-index: 20;
+}
+
+.nav__dropdownName {
+  font-size: 0.95rem;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+
+.nav__dropdownEmpty {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.nav__dropdownBooks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav__dropdownBooks li {
+  font-size: 0.82rem;
+  opacity: 0.85;
+  border-top: 1px solid var(--line);
+  padding-top: 6px;
+}
+
+.nav__dropdownBooks li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+@media (max-width: 640px) {
+  .nav { padding: 16px 20px; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .nav__left { flex-wrap: wrap; gap: 12px; }
+  .nav__links { flex-wrap: wrap; gap: 14px; row-gap: 10px; }
+  .nav__dropdown { right: 0; left: auto; max-width: calc(100vw - 40px); }
+}

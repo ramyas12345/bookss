@@ -1,0 +1,135 @@
+.bookview {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 56px 40px 100px;
+  display: flex;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+
+.bookview__eyebrow {
+  width: 100%;
+  text-align: center;
+  font-family: "Alegreya", Georgia, serif;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--brass-soft);
+  margin: 0 0 8px;
+}
+
+.bookview__side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  position: sticky;
+  top: 40px;
+  height: max-content;
+}
+
+.bookview__edit {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--paper);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-family: "Viga", sans-serif;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.bookview__content {
+  flex: 1;
+  min-width: 300px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 4px 14px 14px 4px;
+  padding: 48px 52px;
+  box-shadow: 0 18px 40px -18px var(--shadow);
+}
+
+.bookview__tag {
+  font-family: "Viga", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  color: var(--brass-soft);
+  margin: 0 0 10px;
+}
+
+.bookview__content h1 {
+  font-family: "Viga", sans-serif;
+  font-size: 2.1rem;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.bookview__byline {
+  font-family: "Viga", sans-serif;
+  font-size: 0.78rem;
+  opacity: 0.65;
+  margin-bottom: 20px;
+}
+
+.bookview__clap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink-surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-family: "Viga", sans-serif;
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+}
+
+.bookview__clap:disabled { opacity: 0.5; cursor: default; }
+
+.bookview__clap--active {
+  background: rgba(201,162,39,0.16);
+  border-color: rgba(201,162,39,0.5);
+  color: var(--brass-soft);
+}
+
+.bookview__body p {
+  font-family: "Alegreya", Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--ink);
+  white-space: pre-wrap;
+  margin: 0 0 20px;
+}
+
+.bookview__image {
+  width: 100%;
+  border-radius: 10px;
+  margin: 8px 0 24px;
+  display: block;
+}
+
+.bookview__empty { opacity: 0.6; font-style: italic; }
+
+.bookview__missing {
+  text-align: center;
+  padding: 120px 20px;
+  opacity: 0.75;
+}
+
+.bookview__missing a { color: var(--brass-soft); font-weight: 600; }
+
+@media (max-width: 720px) {
+  .bookview { padding: 36px 20px 70px; flex-direction: column; }
+  .bookview__side { position: static; flex-direction: row; }
+  .bookview__content { padding: 32px 26px; }
+}
+
+@media (max-width: 480px) {
+  .bookview__side { flex-direction: column; }
+  .bookview__content { padding: 26px 20px; }
+  .bookview__content h1 { font-size: 1.7rem; }
+}

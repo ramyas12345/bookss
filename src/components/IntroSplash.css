@@ -1,0 +1,59 @@
+.introSplash {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 700ms ease;
+}
+
+.introSplash--fadeOut {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.introSplash__title {
+  font-family: var(--font-script);
+  font-size: clamp(3.5rem, 14vw, 8rem);
+  font-weight: 400;
+  color: var(--mustard);
+  margin: 0;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: introZoomIn 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.introSplash__byline {
+  position: absolute;
+  bottom: 64px;
+  font-family: "Viga", sans-serif;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mustard);
+  opacity: 0;
+  animation: introFadeIn 700ms ease forwards;
+  animation-delay: 1100ms;
+}
+
+@keyframes introZoomIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes introFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .introSplash__title,
+  .introSplash__byline {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,205 @@
+.editor {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 90px;
+  font-family: "Viga", sans-serif;
+}
+
+.editor__eyebrow {
+  text-align: center;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  color: var(--brass-soft);
+  margin: 0 0 18px;
+}
+
+.editor__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-wrap: wrap;
+}
+
+.editor__title { font-family: "Viga", sans-serif; font-size: 1.3rem; text-transform: none; letter-spacing: 0; margin-right: auto; }
+
+.editor__reading {
+  background: rgba(201,162,39,0.16);
+  border: 1px solid rgba(201,162,39,0.45);
+  color: var(--brass-soft);
+  padding: 4px 10px;
+  border-radius: 6px;
+  opacity: 1;
+}
+
+.editor__status { color: var(--teal); }
+
+.editor__coverRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.editor__swatchLabel {
+  display: inline-block;
+  background: rgba(201,162,39,0.16);
+  border: 1px solid rgba(201,162,39,0.45);
+  color: var(--brass-soft);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  opacity: 1;
+  margin: 0 0 10px;
+}
+
+.editor__swatchRow { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.editor__swatch {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--swatch);
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.editor__swatch--active {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px var(--ink-surface), 0 0 0 4px var(--swatch);
+}
+
+.editor__textarea {
+  width: 100%;
+  min-height: 46vh;
+  background: var(--ink-surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--paper);
+  padding: 22px;
+  font-size: 1rem;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+.editor__error { color: #A23B3B; font-size: 0.85rem; margin-top: 12px; }
+
+.editor__images {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.editor__thumb {
+  width: 96px;
+}
+
+.editor__thumb img {
+  width: 96px;
+  height: 72px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+.editor__thumbActions {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.editor__thumbActions button {
+  background: none;
+  border: none;
+  color: var(--brass-soft);
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  text-align: left;
+  padding: 1px 0;
+}
+
+.editor__addImage {
+  width: 96px;
+  height: 96px;
+  border: 1px solid rgba(201,162,39,0.45);
+  border-radius: 8px;
+  background: rgba(201,162,39,0.16);
+  color: var(--brass-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+.editor__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 34px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.editor__import {
+  background: rgba(201,162,39,0.16);
+  border: 1px solid rgba(201,162,39,0.45);
+  color: var(--brass-soft);
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.editor__actionsRight { display: flex; gap: 12px; }
+
+.editor__save {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--paper);
+  padding: 11px 20px;
+  border-radius: 8px;
+}
+
+.editor__publish {
+  background: var(--brass);
+  color: var(--ink);
+  border: none;
+  padding: 11px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.editor__blocked {
+  max-width: 500px;
+  margin: 100px auto;
+  text-align: center;
+  opacity: 0.75;
+  padding: 0 20px;
+}
+
+@media (max-width: 640px) {
+  .editor { padding: 32px 16px 70px; }
+  .editor__textarea { font-size: 16px; } /* prevents iOS auto-zoom on focus */
+  .editor__actions { flex-direction: column; align-items: stretch; }
+  .editor__actionsRight { flex-direction: column; }
+  .editor__import,
+  .editor__save,
+  .editor__publish { width: 100%; text-align: center; }
+}
