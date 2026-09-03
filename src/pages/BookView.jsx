@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { CATEGORIES, getBookById, readingTimeMinutes, formatPublishedDate, hasClapped, toggleClap } from "../lib/store";
+import { CATEGORIES, getBookById, readingTimeMinutes, formatPublishedDate, hasClapped, toggleClap, deleteBook } from "../lib/store";
 import { useAuth } from "../context/AuthContext";
 import BookCover from "../components/BookCover";
 import "./BookView.css";
@@ -36,6 +36,7 @@ export default function BookView() {
   const [loading, setLoading] = useState(true);
   const [clapped, setClapped] = useState(false);
   const [clapBusy, setClapBusy] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -87,6 +88,19 @@ export default function BookView() {
     }
   }
 
+  async function handleDelete() {
+    if (!window.confirm(`Delete "${book.title}" permanently? This can't be undone.`)) return;
+    setDeleting(true);
+    try {
+      await deleteBook(book.id);
+      navigate("/books");
+    } catch (err) {
+      console.error(err);
+      alert("Couldn't delete — check your connection and try again.");
+      setDeleting(false);
+    }
+  }
+
   return (
     <div className="bookview">
       <p className="bookview__eyebrow">Let's get reading</p>
@@ -95,6 +109,11 @@ export default function BookView() {
         {isOwner && (
           <button className="bookview__edit" onClick={() => navigate(`/write/${book.id}`)}>
             Keep writing
+          </button>
+        )}
+        {isOwner && (
+          <button className="bookview__delete" onClick={handleDelete} disabled={deleting}>
+            {deleting ? "Deleting…" : "Delete this book"}
           </button>
         )}
       </aside>
