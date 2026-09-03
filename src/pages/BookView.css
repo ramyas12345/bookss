@@ -39,6 +39,23 @@
   font-size: 0.76rem;
   text-transform: uppercase;
 }
+.bookview__delete {
+  background: none;
+  border: 1px solid rgba(233, 160, 160, 0.4);
+  color: #E9A0A0;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-family: "Viga", sans-serif;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.bookview__delete:hover:not(:disabled) {
+  background: rgba(233, 160, 160, 0.1);
+  border-color: #E9A0A0;
+}
+
+.bookview__delete:disabled { opacity: 0.5; cursor: default; }
 
 .bookview__content {
   flex: 1;
