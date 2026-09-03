@@ -112,6 +112,19 @@ export async function updateBook(id, patch) {
   return getBookById(id);
 }
 
+export async function updateBook(id, patch) {
+  const ref = doc(db, "books", id);
+  await updateDoc(ref, { ...patch, updatedAt: serverTimestamp() });
+  return getBookById(id);
+}
+
+// Permanently deletes a book. Firestore security rules restrict this to
+// the book's own author — safe to call from any signed-in user's UI,
+// since a non-owner's request is rejected server-side regardless.
+export async function deleteBook(id) {
+  await deleteDoc(doc(db, "books", id));
+}
+
 // Claps are the whole "reaction instead of comments" system: one clap per
 // reader per book (toggleable, like a like-button), no text input, so
 // there's nothing to moderate. Tracked as a tiny subcollection doc so we
