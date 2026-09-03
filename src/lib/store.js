@@ -112,10 +112,8 @@ export async function updateBook(id, patch) {
   return getBookById(id);
 }
 
-export async function updateBook(id, patch) {
-  const ref = doc(db, "books", id);
-  await updateDoc(ref, { ...patch, updatedAt: serverTimestamp() });
-  return getBookById(id);
+export async function deleteBook(id) {
+  await deleteDoc(doc(db, "books", id));
 }
 
 // Permanently deletes a book. Firestore security rules restrict this to
