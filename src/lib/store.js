@@ -19,8 +19,6 @@ export const CATEGORIES = [
   { id: "literature", label: "Literature" },
 ];
 
-// Curated palette — every cover pulls from this set, never a raw random
-// hue, so the shelf always reads as one designed collection.
 export const SPINE_COLORS = [
   "#7A2E2E", "#2E4A3D", "#5E9490", "#C9A227",
   "#3B4A73", "#6B3E5E", "#8A5A2E", "#3E4A5E",
@@ -52,9 +50,6 @@ export function readingTimeMinutes(content) {
   return Math.max(1, Math.round(words / 200));
 }
 
-// Firestore Timestamp -> "Aug 27, 2026", for showing when a book was
-// first published. Falls back to "" while createdAt is still pending
-// (serverTimestamp() reads back as null until the write round-trips).
 export function formatPublishedDate(timestamp) {
   if (!timestamp?.toDate) return "";
   return timestamp.toDate().toLocaleDateString(undefined, {
@@ -87,7 +82,6 @@ export async function getBooksByAuthor(uid) {
   return snap.docs.map(fromDoc);
 }
 
-// NOTE: no email is ever written onto a book doc — only name + uid.
 export async function createBook({ title, category, coverText, author, color }) {
   const payload = {
     title: title.trim(),
@@ -116,18 +110,6 @@ export async function deleteBook(id) {
   await deleteDoc(doc(db, "books", id));
 }
 
-// Permanently deletes a book. Firestore security rules restrict this to
-// the book's own author — safe to call from any signed-in user's UI,
-// since a non-owner's request is rejected server-side regardless.
-export async function deleteBook(id) {
-  await deleteDoc(doc(db, "books", id));
-}
-
-// Claps are the whole "reaction instead of comments" system: one clap per
-// reader per book (toggleable, like a like-button), no text input, so
-// there's nothing to moderate. Tracked as a tiny subcollection doc so we
-// can check "did this person already clap" without scanning anything,
-// with a denormalized clapCount on the book itself for cheap reads.
 export async function hasClapped(bookId, uid) {
   if (!uid) return false;
   const snap = await getDoc(doc(db, "books", bookId, "claps", uid));
@@ -148,7 +130,6 @@ export async function toggleClap(book, uid, clapperName) {
   await setDoc(clapRef, { createdAt: serverTimestamp() });
   await updateDoc(bookRef, { clapCount: increment(1) });
 
-  // Notify the author, unless they're clapping their own book somehow.
   if (book.authorUid && book.authorUid !== uid) {
     await addDoc(collection(db, "notifications"), {
       toUid: book.authorUid,
@@ -180,11 +161,6 @@ export async function markNotificationsRead(ids) {
   );
 }
 
-// Uploads image files to Cloudinary (free tier, no billing card needed —
-// unlike Firebase Storage, which requires the paid Blaze plan even at
-// $0 actual usage) and returns their public URLs. Those URL strings get
-// stored on the book doc, same shape as before — far lighter than
-// embedding base64 in Firestore either way.
 export async function uploadBookImages(files, uid, bookId) {
   if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) {
     throw new Error(
