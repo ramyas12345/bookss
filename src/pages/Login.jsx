@@ -1,33 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Login.css";
 
 export default function Login() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const { login } = useAuth();
+  const { login, session, loading } = useAuth();
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (!name.trim() || !email.trim()) {
-      setError("Both fields are needed — that's how your books get your name.");
-      return;
-    }
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setError("That email doesn't look right.");
-      return;
-    }
+  // Already signed in? Skip the login screen.
+  useEffect(() => {
+    if (!loading && session) navigate("/books", { replace: true });
+  }, [loading, session, navigate]);
+
+  async function handleGoogle() {
+    setError("");
     setSubmitting(true);
     try {
-      await login(name, email);
-      navigate("/books");
+      await login();
     } catch (err) {
-      setError("Couldn't log in — check your Firebase setup and connection.");
-      console.error(err);
+      if (err.code !== "auth/popup-closed-by-user" && err.code !== "auth/cancelled-popup-request") {
+        setError(
+          err.code === "auth/unauthorized-domain"
+            ? "This domain isn't authorized in Firebase yet."
+            : "Couldn't sign in — please try again."
+        );
+        console.error(err);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -35,29 +35,20 @@ export default function Login() {
 
   return (
     <div className="login">
-      <form className="login__card" onSubmit={handleSubmit}>
+      <div className="login__card">
         <p className="login__eyebrow">Log in to write</p>
-        <h1>Two things, and you're in.</h1>
+        <h1>One click, and you're in.</h1>
         <p className="login__hint">
-          Your name will appear on your cover. Your email stays private and is only used to sign you in.
+          Your name will appear on your cover. Your email stays private and is
+          only used to sign you in.
         </p>
-
-        <label>
-          Full name
-          <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Meera Nair" autoComplete="name" />
-        </label>
-
-        <label>
-          Email
-          <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="meera@example.com" autoComplete="email" type="email" />
-        </label>
 
         {error ? <p className="login__error">{error}</p> : null}
 
-        <button type="submit" className="login__submit" disabled={submitting}>
-          {submitting ? "Entering…" : "Enter"}
+        <button type="button" className="login__submit" onClick={handleGoogle} disabled={submitting}>
+          {submitting ? "Opening Google…" : "Continue with Google"}
         </button>
-      </form>
+      </div>
     </div>
   );
 }
